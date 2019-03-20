@@ -1,0 +1,281 @@
+$type: card
+rules: []
+properties:
+  title:
+    type: element
+    xtype: at-carbon-card-title
+    title: title
+    xgridcols: 12
+    xstyle: 
+    xclass: 
+    actionListeners:
+      - _start
+  view3:
+    type: element
+    title: Liquid View 3
+    xtype: at-core-view
+    actionListeners:
+      - _all
+    modelRoot: state.model
+    view: |-
+      {% unless showList == true %} 
+        <div class="layout-vertical layout-center-center">
+          {% if items.length > 0 %}
+            <div class="circle background-green">
+              <div class="font-headline" style="text-align: center; height: 52px; line-height: 50px;">
+                {% if items.length > 99 %}
+                  99+
+                {% else %}
+                  {{items.length}}
+                {% endif %}
+              </div>
+            </div>
+            <div class="p font-headline grey">New Cards</div>
+            <div class="pb">
+              <at-carbon-button class="background-green" button-type="contained" button-color="green" label="View Cards" at-click-action="showList"></at-carbon-button>
+            </div>
+          {% endif %}
+          {% if items.length == 0 %}
+            <div class="font-headline green">
+              You are all caught up!
+            </div>
+            <div class="p layout-self-stretch font-title grey" style="text-align: center;">
+              There are no new cards.
+            </div>
+          {% endif %}
+        </div>
+      {% endunless %}
+
+      <style>
+      .circle {
+        height: 52px;
+        width: 52px;
+        border-radius: 50%;
+      }
+      </style>
+    updateMode: 0
+  view7:
+    type: element
+    title: Liquid View 6
+    xtype: at-core-view
+    view: |-
+      {% if showList %}
+        {% assign count = 0 %}
+        {% for item in items | limit:6 %}
+          {% assign count = count + 1 %}
+          <div class="container layout-vertical {% if forloop.index > 3 %}expanded-only{%endif%}">
+            {% unless approved == true %}
+              <div class="layout-horizontal background-white">
+                <div class="layout-start p">
+        				  {% if item.StoreMetadataField.logourl %}
+                    <iron-image src="{{item.StoreMetadataField.logourl | component_url}}" sizing="cover" style="width:64px;height:64px" preload></iron-image>
+        				  {% endif %}
+                </div>
+                <div class="layout-flex layout-vertical">
+                  
+                  <div class="py pr container layout-vertical black">
+                    <div class="layout-horizontal layout-justified font-title pbsm">
+                      {{item.title}}
+                    </div>
+        						{% if item.StoreMetadataField.description %}
+                      {% capture bodyLength %}{{item.StoreMetadataField.description | size}}{% endcapture %}
+                      {% if bodyLength < 88 %}
+                        <div class="font-body1 black" style="font-size: 13px;">
+                          {{item.StoreMetadataField.description}}
+                        </div>	
+                      {% else %}
+                        <div class="font-body1 black" style="font-size: 13px; cursor: pointer;" at-click-action="expandBody">
+                          {% if expanded == true %}
+                            <div class="layout-vertical">
+                              <div class="pbsm">
+                                {{item.StoreMetadataField.description}}
+                              </div>
+                              <div class="layout-horizontal layout-end-justified">
+                                <at-carbon-icon icon="now:caret-up" class="grey icon"></at-carbon-icon>
+                              </div>
+                            </div>
+                          {% else %}
+                            <div class="layout-vertical">
+                              <div class="pbsm">
+                                {{item.StoreMetadataField.description |  truncatewords: 8}}
+                              </div>
+                              <div class="layout-horizontal layout-end-justified">
+                                <at-carbon-icon icon="now:caret-down" class="grey icon"></at-carbon-icon>
+                              </div>
+                            </div>
+                          {% endif %}
+                        </div>
+                      {% endif %}
+        						{% endif %}
+                    <div class="pt">
+                      <at-carbon-button class="ml0 background-green" button-type="contained" button-color="green" label="Enable" at-click-action="quickApprove"></at-carbon-button>
+                    </div>
+                  </div>
+        					{{count}}
+        					{% if count != items.length %}
+                    <div class="bb pt"></div>
+        					{% endif %}
+                </div>
+              </div>
+            {% endunless %}
+            {% if approved == true %}
+              <div class="psm background-lightGreen layout-horizontal">
+                <at-carbon-icon icon="now:checkmark" class="white"></at-carbon-icon>
+                <div class="plsm font-title" style="font-size: 14px;">
+                  The {{item.title}} card has been enabled.
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <style>
+      .icon {
+        width: 12px;
+        height: 12px;
+      }
+      </style>
+    modelRoot: state.model
+  footer8:
+    type: element
+    title: Go to My Cards
+    xtype: at-carbon-card-footer
+    href: /
+    expandable: !!bool true
+    hide: !!bool true
+    modelBind: 'hide: !showList, expandable: items.length > 3'
+$meta:
+  cardId: 5
+  preview-data: |-
+    {
+      "items": [
+        {
+          "id": 7,
+          "contentType": "Card",
+          "UserActions": {
+            "cardId": 7,
+            "hasNotifications": false,
+            "isIsoloated": false,
+            "maxItems": 3,
+            "pinnable": true
+          },
+          "title": "Twitter Feed",
+          "name": "twitter-feed-card",
+          "CollectionModeField": {
+            "CollectionMode": "0"
+          },
+          "MaxItemsField": {
+            "MaxItems": "3"
+          },
+          "PriorityField": {
+            "Priority": "5"
+          },
+          "StreamSource": null,
+          "CardComponent": "twitter-feed-card/twitter-feed-card-card",
+          "StoreMetadataField": {
+            "description": "",
+            "logourl": "",
+            "storehide": false,
+            "disableWorkplace": false,
+            "promotion": true
+          },
+          "CommonPart": {
+            "Owner": 2,
+            "Container": null,
+            "CreatedUtc": "2019-03-19T11:31:58.4073696Z",
+            "PublishedUtc": "2019-03-19T16:50:58.1867271Z",
+            "ModifiedUtc": "2019-03-19T16:50:58.0107347Z",
+            "VersionCreatedUtc": "2019-03-19T16:50:58Z",
+            "VersionPublishedUtc": "2019-03-19T16:50:58Z",
+            "VersionModifiedUtc": "2019-03-19T16:50:58Z"
+          },
+          "ServicePart": {
+            "SelectedServiceCatalogId": 34,
+            "Parameters": "{}"
+          },
+          "SearchContextPart": {
+            "Query": null,
+            "Interface": null
+          },
+          "CommandPart": {
+            "CommandType": 0,
+            "Command": "",
+            "DefaultDate": null,
+            "Intent": null,
+            "Ext": {}
+          },
+          "AppPart": {
+            "App": null,
+            "Url": "",
+            "ExtUrl": "",
+            "Priority": 0,
+            "AppFaceId": 0,
+            "Category": "orange",
+            "Icon": "now:search",
+            "CSSClasses": null,
+            "Enabled": false,
+            "NewWindow": false,
+            "UrlWithId": true,
+            "CategoriesList": [
+              "",
+              "blue",
+              "green",
+              "orange",
+              "red",
+              "teal",
+              "yellow"
+            ],
+            "AvailableAppFaceRecords": null,
+            "HasPattern": false
+          },
+          "RoleViewPermissionsPart": {
+            "AllowedRoles": [
+              "Authenticated"
+            ],
+            "Audiences": [
+              "Authenticated"
+            ],
+            "Mandatory": false
+          },
+          "RecurringTaskPart": {
+            "Schedule": "- - - - -",
+            "ActivityType": "adenin.Now.Activities.CardTask.UpdateCard",
+            "StartDateUtc": null,
+            "EndDateUtc": null,
+            "NextOccurrenceUtc": null,
+            "Priority": 5,
+            "Status": "Enabled",
+            "NowFlag": "0",
+            "LastExecutionUTC": null,
+            "EnableWebHook": false,
+            "WebHookToken": null
+          },
+          "date": "2019-03-19T16:50:58.0107347Z"
+        }
+      ]
+    }
+  preview-mode: live
+  preview-container: event
+  search-term: 
+  service-url: 
+  xclass: 
+  xstyle: 
+  code: |-
+    action.initialize = function(evt) {
+      evt.model.approved = false;
+      evt.model.expanded = false;
+      evt.model.showList = false;
+    }
+
+    action.showList = function(evt) {
+      evt.model.showList = true;
+    }
+
+    action.quickApprove = function (evt) {
+    	evt.model.approved = true;
+    }
+
+    action.expandBody = function (evt) {
+    	evt.model.expanded = !evt.model.expanded;
+    }

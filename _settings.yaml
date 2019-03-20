@@ -1,0 +1,69 @@
+contentType: Card
+UserActions:
+  cardId: !!int 5
+  hasNotifications: !!bool false
+  isIsoloated: !!bool false
+  maxItems: !!int 3
+  pinnable: !!bool true
+title: at-card-promotion
+name: at-card-promotion
+CollectionModeField: null
+MaxItemsField: null
+PriorityField: null
+StreamSource: null
+CardComponent: at-card-promotion/at-card-promotion-card
+StoreMetadataField: null
+CommonPart:
+  Owner: !!int 2
+  Container: null
+  CreatedUtc: 2019-03-19T11:24:19.5857574Z
+  PublishedUtc: 2019-03-19T11:24:19.6587957Z
+  ModifiedUtc: 2019-03-19T11:24:19.5857574Z
+  VersionCreatedUtc: 2019-03-19T11:24:19.5857574Z
+  VersionPublishedUtc: 2019-03-19T11:24:19.6587957Z
+  VersionModifiedUtc: 2019-03-19T11:24:19.5857574Z
+ServicePart:
+  ConnectorTypeId: !!int 0
+  ConnectorName: Promotions
+  ServiceName: Promotions
+  Url: ~/api/adenin.Now.Promotions
+  ServiceParameters: '{}'
+SearchContextPart:
+  Query: null
+  Interface: null
+CommandPart:
+  CommandType: None
+  Command: 
+  DefaultDate: null
+  Intent: null
+  Ext: {}
+AppPart:
+  App: null
+  Url: 
+  ExtUrl: 
+  Priority: !!int 0
+  AppFaceId: !!int 0
+  Category: orange
+  Icon: now:search
+  CSSClasses: null
+  Enabled: !!bool false
+  NewWindow: !!bool false
+  UrlWithId: !!bool true
+  AvailableAppFaceRecords: null
+  HasPattern: !!bool false
+RoleViewPermissionsPart:
+  AllowedRoles: []
+  Audiences: []
+  Mandatory: False
+RecurringTaskPart:
+  Schedule: '- - - - -'
+  ActivityType: adenin.Now.Activities.CardTask.UpdateCard
+  StartDateUtc: null
+  EndDateUtc: null
+  NextOccurrenceUtc: null
+  Priority: !!int 5
+  Status: Enabled
+  NowFlag: 0
+  LastExecutionUTC: null
+  EnableWebHook: !!bool false
+  WebHookToken: null
