@@ -54,13 +54,89 @@ properties:
       }
       </style>
     updateMode: 0
-  vlist5:
+  view7:
     type: element
-    xtype: at-core-vlist
-    itemComponent: at-card-promotion/at-card-promotion-item-card
-    modelBind: 'hide: !showList'
-    listHeight: 200px
-    listHeightExpanded: 600px
+    title: Liquid View 6
+    xtype: at-core-view
+    view: |-
+      {% if showList %}
+        {% assign count = 0 %}
+        {% for item in items | limit:6 %}
+          {% assign count = count + 1 %}
+          <div class="container layout-vertical {% if forloop.index > 3 %}expanded-only{%endif%}">
+            {% unless approved == true %}
+              <div class="layout-horizontal background-white">
+                <div class="layout-start p">
+        				  {% if item.StoreMetadataField.logourl %}
+                    <iron-image src="{{item.StoreMetadataField.logourl | component_url}}" sizing="cover" style="width:64px;height:64px" preload></iron-image>
+        				  {% endif %}
+                </div>
+                <div class="layout-flex layout-vertical">
+                  
+                  <div class="py pr container layout-vertical black">
+                    <div class="layout-horizontal layout-justified font-title pbsm">
+                      {{item.title}}
+                    </div>
+        						{% if item.StoreMetadataField.description %}
+                      {% capture bodyLength %}{{item.StoreMetadataField.description | size}}{% endcapture %}
+                      {% if bodyLength < 88 %}
+                        <div class="font-body1 black" style="font-size: 13px;">
+                          {{item.StoreMetadataField.description}}
+                        </div>	
+                      {% else %}
+                        <div class="font-body1 black" style="font-size: 13px; cursor: pointer;" at-click-action="expandBody">
+                          {% if expanded == true %}
+                            <div class="layout-vertical">
+                              <div class="pbsm">
+                                {{item.StoreMetadataField.description}}
+                              </div>
+                              <div class="layout-horizontal layout-end-justified">
+                                <at-carbon-icon icon="now:caret-up" class="grey icon"></at-carbon-icon>
+                              </div>
+                            </div>
+                          {% else %}
+                            <div class="layout-vertical">
+                              <div class="pbsm">
+                                {{item.StoreMetadataField.description |  truncatewords: 8}}
+                              </div>
+                              <div class="layout-horizontal layout-end-justified">
+                                <at-carbon-icon icon="now:caret-down" class="grey icon"></at-carbon-icon>
+                              </div>
+                            </div>
+                          {% endif %}
+                        </div>
+                      {% endif %}
+        						{% endif %}
+                    <div class="pt">
+                      <at-carbon-button class="ml0 background-green" button-type="contained" button-color="green" label="Enable" at-click-action="quickApprove"></at-carbon-button>
+                    </div>
+                  </div>
+        					{{count}}
+        					{% if count != items.length %}
+                    <div class="bb pt"></div>
+        					{% endif %}
+                </div>
+              </div>
+            {% endunless %}
+            {% if approved == true %}
+              <div class="psm background-lightGreen layout-horizontal">
+                <at-carbon-icon icon="now:checkmark" class="white"></at-carbon-icon>
+                <div class="plsm font-title" style="font-size: 14px;">
+                  The {{item.title}} card has been enabled.
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <style>
+      .icon {
+        width: 12px;
+        height: 12px;
+      }
+      </style>
+    modelRoot: state.model
   footer8:
     type: element
     title: Go to My Cards
@@ -187,9 +263,19 @@ $meta:
   xstyle: 
   code: |-
     action.initialize = function(evt) {
+      evt.model.approved = false;
+      evt.model.expanded = false;
       evt.model.showList = false;
     }
 
     action.showList = function(evt) {
       evt.model.showList = true;
+    }
+
+    action.quickApprove = function (evt) {
+    	evt.model.approved = true;
+    }
+
+    action.expandBody = function (evt) {
+    	evt.model.expanded = !evt.model.expanded;
     }

@@ -1,0 +1,100 @@
+$type: card
+properties:
+  view1:
+    type: element
+    title: View
+    xtype: at-core-view
+    view: |-
+      <div class="container layout-vertical">
+        {% unless approved == true %}
+          <div class="layout-horizontal background-white">
+            <div class="layout-start p">
+              {% if StoreMetadataField.logourl %}
+                <iron-image src="{{StoreMetadataField.logourl | component_url}}" sizing="cover" style="width:64px;height:64px" preload></iron-image>
+        	    {% endif %}
+            </div>
+            <div class="layout-flex layout-vertical">       
+              <div class="py pr container layout-vertical black">
+                <div class="layout-horizontal layout-justified font-title pbsm">
+                  {{title}}
+                </div>
+        			  {% if StoreMetadataField.description %}
+                  {% capture bodyLength %}{{StoreMetadataField.description | size}}{% endcapture %}
+                  {% if bodyLength < 88 %}
+                    <div class="font-body1 black" style="font-size: 13px;">
+                      {{StoreMetadataField.description}}
+                    </div>	
+                  {% else %}
+                    <div class="font-body1 black" style="font-size: 13px; cursor: pointer;" at-click-action="expandBody">
+                      {% if expanded == true %}
+                        <div class="layout-vertical">
+                          <div class="pbsm">
+                            {{StoreMetadataField.description}}
+                          </div>
+                          <div class="layout-horizontal layout-end-justified">
+                            <at-carbon-icon icon="now:caret-up" class="grey icon"></at-carbon-icon>
+                          </div>
+                        </div>
+                      {% else %}
+                        <div class="layout-vertical">
+                          <div class="pbsm">
+                            {{StoreMetadataField.description |  truncatewords: 8}}
+                          </div>
+                          <div class="layout-horizontal layout-end-justified">
+                            <at-carbon-icon icon="now:caret-down" class="grey icon"></at-carbon-icon>
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+        	  	  {% endif %}
+                <div class="pt">
+                  <at-carbon-button class="ml0 background-green" button-type="contained" button-color="green" label="Enable" at-click-action="quickApprove"></at-carbon-button>
+                </div>
+              </div>
+              <div class="bb pt"></div>
+            </div>
+          </div>
+        {% endunless %}
+        {% if approved == true %}
+          <div class="psm background-lightGreen layout-horizontal">
+            <at-carbon-icon icon="now:checkmark" class="white"></at-carbon-icon>
+            <div class="plsm font-title" style="font-size: 14px;">
+              The {{title}} card has been enabled.
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <style>
+      .icon {
+        width: 12px;
+        height: 12px;
+      }
+      </style>
+$meta:
+  cardId: 
+  preview-mode: static
+  preview-container: item
+  search-term: 
+  service-url: 
+  preview-data: |-
+    {
+      "title": "abc"
+    }
+  xclass: 
+  xstyle: 
+  code: |-
+    action.initialize = function (state) {
+    	state.model.approved = false;
+      state.model.expanded = false;
+    }
+
+    action.quickApprove = function (evt) {
+    	evt.model.approved = true;
+    }
+
+    action.expandBody = function (evt) {
+    	evt.model.expanded = !evt.model.expanded;
+    }
+rules: []
