@@ -21,7 +21,7 @@ properties:
       {% unless showList == true %} 
         <div class="layout-vertical layout-center-center">
           {% if items.length > 0 %}
-            <div class="circle background-green">
+            <div class="circle background-blue">
               <div class="font-headline" style="text-align: center; height: 52px; line-height: 50px;">
                 {% if items.length > 99 %}
                   99+
@@ -32,7 +32,7 @@ properties:
             </div>
             <div class="p font-headline grey">New Cards</div>
             <div class="pb">
-              <at-carbon-button class="background-green" button-type="contained" button-color="green" label="View Cards" at-click-action="showList"></at-carbon-button>
+              <at-carbon-button class="background-blue" button-type="contained" button-color="blue" label="View Cards" at-click-action="showList"></at-carbon-button>
             </div>
           {% endif %}
           {% if items.length == 0 %}
@@ -64,7 +64,7 @@ properties:
         {% for item in items | limit:6 %}
           {% assign count = count + 1 %}
           <div class="container layout-vertical {% if forloop.index > 3 %}expanded-only{%endif%}">
-            {% unless approved == true %}
+            {% unless item.approved == true %}
               <div class="layout-horizontal background-white">
                 <div class="layout-start p">
         				  {% if item.StoreMetadataField.logourl %}
@@ -108,7 +108,7 @@ properties:
                       {% endif %}
         						{% endif %}
                     <div class="pt">
-                      <at-carbon-button class="ml0 background-green" button-type="contained" button-color="green" label="Enable" at-click-action="quickApprove"></at-carbon-button>
+                      <at-carbon-button class="ml0 background-blue" button-type="contained" button-color="blue" label="Enable" at-click-action="quickApprove" at-agent-action="enable" card-id="{{item.id}}"></at-carbon-button>
                     </div>
                   </div>
         					{{count}}
@@ -118,8 +118,8 @@ properties:
                 </div>
               </div>
             {% endunless %}
-            {% if approved == true %}
-              <div class="psm background-lightGreen layout-horizontal">
+            {% if item.approved == true %}
+              <div class="psm background-lightBlue layout-horizontal">
                 <at-carbon-icon icon="now:checkmark" class="white"></at-carbon-icon>
                 <div class="plsm font-title" style="font-size: 14px;">
                   The {{item.title}} card has been enabled.
@@ -146,22 +146,22 @@ properties:
     hide: !!bool true
     modelBind: 'hide: !showList, expandable: items.length > 3'
 $meta:
-  cardId: 5
+  cardId: 515
   preview-data: |-
     {
       "items": [
         {
-          "id": 7,
+          "id": 504,
           "contentType": "Card",
           "UserActions": {
-            "cardId": 7,
+            "cardId": 504,
             "hasNotifications": false,
             "isIsoloated": false,
             "maxItems": 3,
             "pinnable": true
           },
-          "title": "Twitter Feed",
-          "name": "twitter-feed-card",
+          "title": "My Tasks",
+          "name": "my-task-status",
           "CollectionModeField": {
             "CollectionMode": "0"
           },
@@ -172,9 +172,9 @@ $meta:
             "Priority": "5"
           },
           "StreamSource": null,
-          "CardComponent": "twitter-feed-card/twitter-feed-card-card",
+          "CardComponent": "ticket-status/ticket-status-card",
           "StoreMetadataField": {
-            "description": "",
+            "description": "store description XXX\n",
             "logourl": "",
             "storehide": false,
             "disableWorkplace": false,
@@ -183,16 +183,117 @@ $meta:
           "CommonPart": {
             "Owner": 2,
             "Container": null,
-            "CreatedUtc": "2019-03-19T11:31:58.4073696Z",
-            "PublishedUtc": "2019-03-19T16:50:58.1867271Z",
-            "ModifiedUtc": "2019-03-19T16:50:58.0107347Z",
-            "VersionCreatedUtc": "2019-03-19T16:50:58Z",
-            "VersionPublishedUtc": "2019-03-19T16:50:58Z",
-            "VersionModifiedUtc": "2019-03-19T16:50:58Z"
+            "CreatedUtc": "2019-02-19T07:54:27.9973056Z",
+            "PublishedUtc": "2019-03-05T08:45:14.3762657Z",
+            "ModifiedUtc": "2019-03-05T08:45:14.2765331Z",
+            "VersionCreatedUtc": "2019-03-05T13:45:14Z",
+            "VersionPublishedUtc": "2019-03-05T13:45:14Z",
+            "VersionModifiedUtc": "2019-03-05T13:45:14Z"
           },
           "ServicePart": {
-            "SelectedServiceCatalogId": 34,
+            "SelectedServiceCatalogId": 398,
             "Parameters": "{}"
+          },
+          "SearchContextPart": {
+            "Query": null,
+            "Interface": null
+          },
+          "CommandPart": {
+            "CommandType": 6,
+            "Command": "show me (my) (assigned) tasks\r\n(my) (assigned) tasks\r\n",
+            "DefaultDate": null,
+            "Intent": null,
+            "Ext": {}
+          },
+          "AppPart": {
+            "App": null,
+            "Url": "",
+            "ExtUrl": "",
+            "Priority": 0,
+            "AppFaceId": 0,
+            "Category": "orange",
+            "Icon": "now:search",
+            "CSSClasses": null,
+            "Enabled": false,
+            "NewWindow": false,
+            "UrlWithId": true,
+            "CategoriesList": [
+              "",
+              "blue",
+              "green",
+              "orange",
+              "red",
+              "teal",
+              "yellow"
+            ],
+            "AvailableAppFaceRecords": null,
+            "HasPattern": false
+          },
+          "RoleViewPermissionsPart": {
+            "AllowedRoles": [
+              "Authenticated"
+            ],
+            "Audiences": [],
+            "Mandatory": false
+          },
+          "RecurringTaskPart": {
+            "Schedule": "- - - - -",
+            "ActivityType": "adenin.Now.Activities.CardTask.UpdateCard",
+            "StartDateUtc": null,
+            "EndDateUtc": null,
+            "NextOccurrenceUtc": null,
+            "Priority": 5,
+            "Status": "Enabled",
+            "NowFlag": "0",
+            "LastExecutionUTC": null,
+            "EnableWebHook": false,
+            "WebHookToken": null
+          },
+          "date": "2019-03-05T08:45:14.2765331Z"
+        },
+        {
+          "id": 497,
+          "contentType": "Card",
+          "UserActions": {
+            "cardId": 497,
+            "hasNotifications": false,
+            "isIsoloated": false,
+            "maxItems": 3,
+            "pinnable": true
+          },
+          "title": "Ticket Status",
+          "name": "ticket-status-1",
+          "CollectionModeField": {
+            "CollectionMode": "0"
+          },
+          "MaxItemsField": {
+            "MaxItems": "3"
+          },
+          "PriorityField": {
+            "Priority": "5"
+          },
+          "StreamSource": null,
+          "CardComponent": "ticket-status/ticket-status-card",
+          "StoreMetadataField": {
+            "description": "store description XXX\n",
+            "logourl": "",
+            "storehide": false,
+            "disableWorkplace": false,
+            "promotion": true
+          },
+          "CommonPart": {
+            "Owner": 2,
+            "Container": null,
+            "CreatedUtc": "2019-02-19T07:54:27.9973056Z",
+            "PublishedUtc": "2019-02-21T09:06:53.701513Z",
+            "ModifiedUtc": "2019-02-21T09:06:53.489928Z",
+            "VersionCreatedUtc": "2019-02-21T14:06:53Z",
+            "VersionPublishedUtc": "2019-02-21T14:06:53Z",
+            "VersionModifiedUtc": "2019-02-21T14:06:53Z"
+          },
+          "ServicePart": {
+            "SelectedServiceCatalogId": 119,
+            "Parameters": null
           },
           "SearchContextPart": {
             "Query": null,
@@ -233,9 +334,7 @@ $meta:
             "AllowedRoles": [
               "Authenticated"
             ],
-            "Audiences": [
-              "Authenticated"
-            ],
+            "Audiences": [],
             "Mandatory": false
           },
           "RecurringTaskPart": {
@@ -251,7 +350,7 @@ $meta:
             "EnableWebHook": false,
             "WebHookToken": null
           },
-          "date": "2019-03-19T16:50:58.0107347Z"
+          "date": "2019-02-21T09:06:53.489928Z"
         }
       ]
     }
@@ -266,6 +365,10 @@ $meta:
       evt.model.approved = false;
       evt.model.expanded = false;
       evt.model.showList = false;
+        
+      for(var i=0;i<evt.model.items.length;i++) {
+        evt.model.items[i].approved = false;
+      }
     }
 
     action.showList = function(evt) {
@@ -273,7 +376,9 @@ $meta:
     }
 
     action.quickApprove = function (evt) {
-    	evt.model.approved = true;
+      for(var i=0;i<evt.model.items.length;i++) {
+        if(evt.model.items[i].id == evt.args.cardId)  evt.model.items[i].approved = true;
+      }
     }
 
     action.expandBody = function (evt) {

@@ -49,7 +49,7 @@ properties:
                   {% endif %}
         	  	  {% endif %}
                 <div class="pt">
-                  <at-carbon-button class="ml0 background-green" button-type="contained" button-color="green" label="Enable" at-click-action="quickApprove"></at-carbon-button>
+                  <at-carbon-button class="ml0 background-green" button-type="contained" button-color="green" label="Enable" at-click-action="quickApprove" at-agent-action="enable" card-id="{{id}}" ></at-carbon-button>
                 </div>
               </div>
               <div class="bb pt"></div>
@@ -72,6 +72,7 @@ properties:
         height: 12px;
       }
       </style>
+    modelRoot: state.model
 $meta:
   cardId: 
   preview-mode: static

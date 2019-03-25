@@ -1,6 +1,6 @@
 {
   "name": "at-card-promotion",
-  "version": "0.0.1.45",
+  "version": "0.0.1.59",
   "private": true,
   "dependencies": {
     "polymer": "Polymer/polymer#master"

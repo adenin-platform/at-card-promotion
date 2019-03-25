@@ -27,7 +27,6 @@ ServicePart:
   ConnectorName: Promotions
   ServiceName: Promotions
   Url: ~/api/adenin.Now.Promotions
-  ServiceParameters: '{}'
 SearchContextPart:
   Query: null
   Interface: null
