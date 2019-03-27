@@ -141,7 +141,7 @@ properties:
     type: element
     title: Go to My Cards
     xtype: at-carbon-card-footer
-    href: /
+    href: /App#!at-now/card-store
     expandable: !!bool true
     hide: !!bool true
     modelBind: 'hide: !showList, expandable: items.length > 3'
@@ -369,6 +369,8 @@ $meta:
       for(var i=0;i<evt.model.items.length;i++) {
         evt.model.items[i].approved = false;
       }
+      
+      if(evt.model.items.length==1) evt.model.showList = true;
     }
 
     action.showList = function(evt) {

@@ -65,7 +65,7 @@ properties:
     type: element
     title: Go to My Cards
     xtype: at-carbon-card-footer
-    href: /
+    href: /App#!at-now/card-store
     expandable: !!bool true
     hide: !!bool true
     modelBind: 'hide: !showList, expandable: items.length > 3'
@@ -74,107 +74,6 @@ $meta:
   preview-data: |-
     {
       "items": [
-        {
-          "id": 504,
-          "contentType": "Card",
-          "UserActions": {
-            "cardId": 504,
-            "hasNotifications": false,
-            "isIsoloated": false,
-            "maxItems": 3,
-            "pinnable": true
-          },
-          "title": "My Tasks",
-          "name": "my-task-status",
-          "CollectionModeField": {
-            "CollectionMode": "0"
-          },
-          "MaxItemsField": {
-            "MaxItems": "3"
-          },
-          "PriorityField": {
-            "Priority": "5"
-          },
-          "StreamSource": null,
-          "CardComponent": "ticket-status/ticket-status-card",
-          "StoreMetadataField": {
-            "description": "store description XXX\n",
-            "logourl": "",
-            "storehide": false,
-            "disableWorkplace": false,
-            "promotion": true
-          },
-          "CommonPart": {
-            "Owner": 2,
-            "Container": null,
-            "CreatedUtc": "2019-02-19T07:54:27.9973056Z",
-            "PublishedUtc": "2019-03-05T08:45:14.3762657Z",
-            "ModifiedUtc": "2019-03-05T08:45:14.2765331Z",
-            "VersionCreatedUtc": "2019-03-05T13:45:14Z",
-            "VersionPublishedUtc": "2019-03-05T13:45:14Z",
-            "VersionModifiedUtc": "2019-03-05T13:45:14Z"
-          },
-          "ServicePart": {
-            "SelectedServiceCatalogId": 398,
-            "Parameters": "{}"
-          },
-          "SearchContextPart": {
-            "Query": null,
-            "Interface": null
-          },
-          "CommandPart": {
-            "CommandType": 6,
-            "Command": "show me (my) (assigned) tasks\r\n(my) (assigned) tasks\r\n",
-            "DefaultDate": null,
-            "Intent": null,
-            "Ext": {}
-          },
-          "AppPart": {
-            "App": null,
-            "Url": "",
-            "ExtUrl": "",
-            "Priority": 0,
-            "AppFaceId": 0,
-            "Category": "orange",
-            "Icon": "now:search",
-            "CSSClasses": null,
-            "Enabled": false,
-            "NewWindow": false,
-            "UrlWithId": true,
-            "CategoriesList": [
-              "",
-              "blue",
-              "green",
-              "orange",
-              "red",
-              "teal",
-              "yellow"
-            ],
-            "AvailableAppFaceRecords": null,
-            "HasPattern": false
-          },
-          "RoleViewPermissionsPart": {
-            "AllowedRoles": [
-              "Authenticated"
-            ],
-            "Audiences": [],
-            "Mandatory": false
-          },
-          "RecurringTaskPart": {
-            "Schedule": "- - - - -",
-            "ActivityType": "adenin.Now.Activities.CardTask.UpdateCard",
-            "StartDateUtc": null,
-            "EndDateUtc": null,
-            "NextOccurrenceUtc": null,
-            "Priority": 5,
-            "Status": "Enabled",
-            "NowFlag": "0",
-            "LastExecutionUTC": null,
-            "EnableWebHook": false,
-            "WebHookToken": null
-          },
-          "date": "2019-03-05T08:45:14.2765331Z"
-        },
         {
           "id": 497,
           "contentType": "Card",
